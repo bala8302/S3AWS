@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -16,6 +19,7 @@ import org.testng.annotations.Test;
 public class RWD {
 	
 	public static WebDriver driver;
+	public static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 	@Test
 	public void testingRemote() throws IOException
 	{
@@ -32,7 +36,8 @@ public class RWD {
 	{
 		TakesScreenshot obj = (TakesScreenshot)driver;
 		File src = obj.getScreenshotAs(OutputType.FILE);
-		String des="C:\\Users\\91984\\Desktop\\Devops\\AWSScreenshot.png";
+		//String des="C:\\Users\\91984\\Desktop\\Devops\\AWSScreenshot.png";
+		String des =System.getProperty("user.dir")+File.separator+"Screenshots" +File.separator+dateFormat.format(new Date())+"_picture.png";
 		File trg = new File(des);
 		FileUtils.copyFile(src, trg);
 	}
